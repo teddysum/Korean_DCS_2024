@@ -4,7 +4,7 @@
 학습, 추론의 실행 방법(How to Run)은 아래에서 확인하실 수 있습니다.   
 
 |Model|Evaluation Score|ROUGE-1|bertscore|bluert|
-|:---:|---|---|---|---|
+|:---|---|---|---|---|
 |MLP-KTLim/llama-3-Korean-Bllossom-8B (without SFT)|54.276|44.592|73.277|44.958|
 |MLP-KTLim/llama-3-Korean-Bllossom-8B (with SFT)|0.0|0.0|0.0|0.0|
 
