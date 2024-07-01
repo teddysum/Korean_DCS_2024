@@ -60,7 +60,9 @@ src
 ```
 python -m run.train \
     --model_id MLP-KTLim/llama-3-Korean-Bllossom-8B \
-    --device cuda:0
+    --epoch 5 \
+    --lr 2e-5 \
+    --gradient_accumulation_steps 64
 ```
 
 ### 추론 (Inference)
