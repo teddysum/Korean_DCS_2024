@@ -37,7 +37,7 @@ def main(args):
     if args.tokenizer == None:
         args.tokenizer = args.model_id
     tokenizer = AutoTokenizer.from_pretrained(args.tokenizer)
-    tokenizer.padding_side = "left"
+    tokenizer.pad_token = tokenizer.eos_token
 
     train_dataset = CustomDataset("resource/data/대화맥락추론_train.json", tokenizer)
     # valid_dataset = CustomDataset("resource/data/대화맥락추론_dev.json", tokenizer)

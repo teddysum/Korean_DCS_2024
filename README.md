@@ -3,9 +3,9 @@
 
 학습, 추론의 실행 방법(How to Run)은 아래에서 확인하실 수 있습니다.   
 
-|Model|Score-0|Score-1|
-|:---:|---|---|
-|MLP-KTLim/llama-3-Korean-Bllossom-8B|0.0|0.0|
+|Model|Evaluation Score|ROUGE-1|bertscore|bluert|
+|:---:|---|---|---|---|
+|MLP-KTLim/llama-3-Korean-Bllossom-8B|54.276|44.5921826|73.277|44.958|
 
 ## 리포지토리 구조 (Repository Structure)
 ```

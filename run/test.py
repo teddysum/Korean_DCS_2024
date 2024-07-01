@@ -22,6 +22,7 @@ g.add_argument("--device", type=str, required=True, help="device to load the mod
 
 
 def main(args):
+
     model = AutoModelForCausalLM.from_pretrained(
         args.model_id,
         torch_dtype=torch.bfloat16,
@@ -32,41 +33,28 @@ def main(args):
     if args.tokenizer == None:
         args.tokenizer = args.model_id
     tokenizer = AutoTokenizer.from_pretrained(args.tokenizer)
+    tokenizer.pad_token = tokenizer.eos_token
+    terminators = [
+        tokenizer.eos_token_id,
+        tokenizer.convert_tokens_to_ids("<|eot_id|>")
+    ]
 
-    dataset = CustomDataset("resource/data/대화맥락추론_test.json", tokenizer)
+    dataset = CustomDataset("resource/data/일상대화요약_test.json", tokenizer)
 
-    with open("resource/data/대화맥락추론_test.json", "r") as f:
+    with open("resource/data/일상대화요약_test.json", "r") as f:
         result = json.load(f)
-        answer_dict = {
-            0: "inference_1",
-            1: "inference_2",
-            2: "inference_3",
-        }
 
     for idx in tqdm.tqdm(range(len(dataset))):
-        inp, _ = dataset[idx]
-        outputs = model(
-            inp.to(args.device)
-        )
-        logits = outputs.logits[:,-1].flatten()
-        probs = (
-            torch.nn.functional.softmax(
-                torch.tensor(
-                    [
-                        logits[tokenizer.vocab['A']],
-                        logits[tokenizer.vocab['B']],
-                        logits[tokenizer.vocab['C']],
-                    ]
-                ),
-                dim=0,
-            )
-            .detach()
-            .cpu()
-            .to(torch.float32)
-            .numpy()
+        inp = dataset[idx]
+        outputs = model.generate(
+            inp.to(args.device).unsqueeze(0),
+            max_new_tokens=1024,
+            eos_token_id=terminators,
+            pad_token_id=tokenizer.eos_token_id,
+            do_sample=False,
         )
 
-        result[idx]["output"] = answer_dict[numpy.argmax(probs)]
+        result[idx]["output"] = tokenizer.decode(outputs[0][inp.shape[-1]:], skip_special_tokens=True)
 
     with open(args.output, "w", encoding="utf-8") as f:
         f.write(json.dumps(result, ensure_ascii=False, indent=4))
