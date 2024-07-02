@@ -6,7 +6,7 @@
 |Model|Evaluation Score|ROUGE-1|bertscore|bluert|
 |:---|---|---|---|---|
 |MLP-KTLim/llama-3-Korean-Bllossom-8B (without SFT)|54.276|44.592|73.277|44.958|
-|MLP-KTLim/llama-3-Korean-Bllossom-8B (with SFT)|0.0|0.0|0.0|0.0|
+|MLP-KTLim/llama-3-Korean-Bllossom-8B (with SFT)|58.982|54.759|79.154|43.035|
 
 ## 리포지토리 구조 (Repository Structure)
 ```
