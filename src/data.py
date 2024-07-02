@@ -43,6 +43,8 @@ class CustomDataset(Dataset):
             )
 
             target = example["output"]
+            if target != "":
+                target += tokenizer.eos_token
             target = tokenizer(target,
                       return_attention_mask=False,
                       add_special_tokens=False,
