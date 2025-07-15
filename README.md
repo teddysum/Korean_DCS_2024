@@ -13,7 +13,7 @@
 |Model|ROUGE-1|
 |:---|---|
 |MLP-KTLim/llama-3-Korean-Bllossom-8B (without SFT)|44.592|
-|MLP-KTLim/llama-3-Korean-Bllossom-8B (with SFT)|54.759|
+|MLP-KTLim/llama-3-Korean-Bllossom-8B (with SFT)|54.756|
 
 ## 리포지토리 구조 (Repository Structure)
 ```
